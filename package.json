@@ -1,0 +1,25 @@
+{
+	"name": "bird-brain",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"setup-dbs": "psql -f database/setup.sql",
+		"test": "jest --watch",
+		"start": "node server/listen.js",
+		"seed-test": "node ./database/seed.js",
+		"seed-prod": "NODE_ENV=production DATABASE_URL=$(heroku config:get DATABASE_URL) npm run seed"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
+		"pg": "^8.7.3"
+	},
+	"devDependencies": {
+		"jest": "^27.5.1",
+		"supertest": "^6.2.2"
+	}
+}
