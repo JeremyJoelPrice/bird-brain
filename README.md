@@ -11,3 +11,8 @@ If no user is found, 404 Not Found will be returned.
 The controller again assumes the password and email address are valid.
 If the email is already in the database, a 409 error will be returned.
 If the email doens't match anything, the user will be added to the database, and a 201 status will be returned.
+
+## Getting Fact Cards
+The controller must be given a valid user_id.
+It assumes the user_id given will always be valid, because the front end was given a valid user_id in response to the GET /login request.
+This endpoint returns an array with any and all cards the user owns, and an empty array if the user owns no cards.

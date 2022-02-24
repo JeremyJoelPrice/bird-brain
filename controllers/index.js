@@ -1,4 +1,4 @@
-const { createUser, fetchUserId } = require("../models");
+const { createUser, fetchCards, fetchUserId } = require("../models");
 
 exports.sampleController = (req, res, next) => {
 	res.status(200).send(require("../server/greeting.json"));
@@ -18,6 +18,14 @@ exports.signupController = (req, res, next) => {
 	createUser(email, password, nickname)
 		.then(() => {
 			res.send(201);
+		})
+		.catch(next);
+};
+
+exports.getCardsController = (req, res, next) => {
+	fetchCards(req.params.user_id)
+		.then(({ rows }) => {
+			res.status(200).send({ cards: rows });
 		})
 		.catch(next);
 };

@@ -2,6 +2,7 @@ const express = require("express");
 
 const {
 	loginController,
+	getCardsController,
 	sampleController,
 	signupController
 } = require("../controllers");
@@ -19,6 +20,8 @@ app.get("/", sampleController);
 
 app.get("/login", loginController);
 app.post("/login", signupController);
+
+app.get("/users/:user_id/cards", getCardsController);
 
 app.use(handleCustomErrors);
 app.use(handlePsqlErrors);

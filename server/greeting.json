@@ -25,7 +25,8 @@
 					"card_id": "...",
 					"image_url": "...",
 					"fact": "...",
-					"bird_id": "..."
+					"bird_id": "...",
+					"count": "number of copies of this card owned by this user"
 				}
 			]
 		}

@@ -93,3 +93,39 @@ describe("/login", () => {
 		});
 	});
 });
+
+describe("/users/:user_id/fact_cards", () => {
+	it("returns 200 status and array of cards, each with a 'count' property", () => {
+		return supertest(app)
+			.get("/users/4/cards")
+			.expect(200)
+			.then((response) => {
+				expect(response.body).toMatchObject({
+					cards: [
+						{
+							card_id: 2,
+							fact: "rutrum.",
+							image_url: "QZD83SQL6DF",
+							bird_name: "Zane Orr",
+							count: "2"
+						},
+						{
+							card_id: 5,
+							fact: "diam. Proin dolor. Nulla semper tellus id nunc",
+							image_url: "JUH93KHS5YM",
+							bird_name: "Fletcher Hahn",
+							count: "1"
+						}
+					]
+				});
+			});
+	});
+	it("returns 200 status and empty array, if given a user who has no cards", () => {
+		return supertest(app)
+			.get("/users/1/cards")
+			.expect(200)
+			.then((response) => {
+				expect(response.body).toMatchObject({ cards: [] });
+			});
+	});
+});
