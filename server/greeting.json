@@ -1,25 +1,17 @@
 {
-	"/": {
-		"GET": {
-			"sample response": "this document"
-		}
+	"GET /": {
+		"example response": "this document"
 	},
-	"/login": {
-		"POST": {
-			"send body": {
-				"username": "Example User",
-				"password": "examplepassword"
-			},
-			"alternative send body": {
-				"email": "example@email.com",
-				"password": "examplepassword"
-			},
-			"example response": "TBD, probably includes user_id"
-		}
+	"GET /login": {
+		"example request": {
+			"email": "example@email.com",
+			"password": "examplepassword"
+		},
+		"example response": { "user_id": 1 }
 	},
-	"/users/:user_id/cards": {
+	"GET /users/:user_id/fact_cards": {
 		"example response": {
-			"bird cards": [
+			"fact_cards": [
 				{
 					"card_id": "...",
 					"image_url": "...",
@@ -29,12 +21,11 @@
 			]
 		}
 	},
-	"/users/:user_id/photo": {
-		"POST": {
-			"send body": {
-				"user_id": "..."
-			},
-			"example response": "TBD"
-		}
+	"POST /photo": {
+		"example request": {
+			"user_id": 1
+		},
+		"some kind of photo": "somehow",
+		"example response": "TBD"
 	}
 }
