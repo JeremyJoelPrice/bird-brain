@@ -5,9 +5,16 @@ exports.handleCustomErrors = (err, req, res, next) => {
 };
 
 exports.handlePsqlErrors = (err, req, res, next) => {
-	if (err.code === "22P02") {
-		res.status(400).send({ msg: "Invalid input" });
-	} else next(err);
+	switch (err.code) {
+		case "22P02":
+			res.status(400).send({ msg: "Invalid input" });
+			break;
+		case "23505":
+			res.status(409).send({ msg: "Email already registered" });
+			break;
+		default:
+			next(err);
+	}
 };
 
 exports.handleServerErrors = (err, req, res, next) => {

@@ -2,12 +2,21 @@
 	"GET /": {
 		"example response": "this document"
 	},
-	"GET /login": {
-		"example request": {
-			"email": "example@email.com",
-			"password": "examplepassword"
+	"/login": {
+		"GET": {
+			"example request": {
+				"email": "example@email.com",
+				"password": "examplepassword"
+			},
+			"example response": { "user_id": 1 }
 		},
-		"example response": { "user_id": 1 }
+		"POST": {
+			"example request": {
+				"email": "example@email.com",
+				"password": "examplepassword"
+			},
+			"example response": { "status": 201 }
+		}
 	},
 	"GET /users/:user_id/fact_cards": {
 		"example response": {

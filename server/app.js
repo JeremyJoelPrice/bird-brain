@@ -1,6 +1,10 @@
 const express = require("express");
 
-const { sampleController, loginController } = require("../controllers");
+const {
+	loginController,
+	sampleController,
+	signupController
+} = require("../controllers");
 const {
 	handleCustomErrors,
 	handlePsqlErrors,
@@ -14,6 +18,7 @@ app.use(express.json());
 app.get("/", sampleController);
 
 app.get("/login", loginController);
+app.post("/login", signupController);
 
 app.use(handleCustomErrors);
 app.use(handlePsqlErrors);
