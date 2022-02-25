@@ -34,3 +34,12 @@ exports.getCardsController = (req, res, next) => {
 exports.sendPhotoController = (req, res, next) => {
 	throw { status: 404, msg: "Kate Moss not found" };
 };
+
+exports.getPhotoController = (req, res, next) => {
+	res
+		.status(200)
+		.sendFile(
+			`${req.params.bird}/${req.params.bird}-${req.params.imageNum}.jpg`,
+			{ root: __dirname + "/../database/production data/images/" }
+		);
+};

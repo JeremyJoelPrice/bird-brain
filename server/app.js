@@ -1,8 +1,9 @@
 const express = require("express");
-
+const path = require("path");
 const {
 	loginController,
 	getCardsController,
+	getPhotoController,
 	sampleController,
 	sendPhotoController,
 	signupController
@@ -27,6 +28,7 @@ app.post("/login", signupController);
 app.get("/users/:user_id/cards", getCardsController);
 
 app.post("/photo", upload.single("photo"), sendPhotoController);
+app.get("/photo/:bird/:imageNum", getPhotoController);
 
 app.use(handleCustomErrors);
 app.use(handlePsqlErrors);
