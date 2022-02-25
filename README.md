@@ -28,3 +28,6 @@ Bird Brain expects to be given a multipart form with an image file tagged as "ph
 
 It also expects to be given a `user_id` field with a valid value.
 Current this endpoint returns a (hilarious) `404: Kate Moss not found` message, but once the model has been connected this will change.
+
+## Downloading Photos
+Using the `GET /photos/:bird_name/image_num` endpoint, you can download specific photos of birds. Each fact card has the parameters you need to get its corresponding image.

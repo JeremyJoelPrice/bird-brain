@@ -35,5 +35,8 @@
 		"example request": "multipart form with an image file and a valid 'user_id'",
 		"some kind of photo": "somehow",
 		"example response": "an error for now, until the TensorFlow model is connected"
+	},
+	"GET /photo/:bird_name/:image_num": {
+		"returns": "a jpg image of the specified bird"
 	}
 }
