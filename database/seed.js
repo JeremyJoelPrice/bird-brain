@@ -4,9 +4,9 @@ const database = require("./connection");
 module.exports = async ({ fact_cards, users, users_fact_cards }) => {
 	await dropTables();
 	await createTables();
-	await insertUserData(users);
-	await insertFactCardData(fact_cards);
-	await insertUserFactCardData(users_fact_cards);
+	if (users.length < 0) await insertUserData(users);
+	if (fact_cards.length < 0) await insertFactCardData(fact_cards);
+	if (users_fact_cards.length < 0) await insertUserFactCardData(users_fact_cards);
 };
 
 async function dropTables() {
