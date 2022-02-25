@@ -6,9 +6,10 @@
 	"scripts": {
 		"setup-dbs": "psql -f database/setup.sql",
 		"test": "jest --watch",
+		"dev-start": "node ./database/run-seed.js && node server/listen.js",
 		"start": "node server/listen.js",
-		"seed-test": "node ./database/seed.js",
-		"seed-prod": "NODE_ENV=production DATABASE_URL=$(heroku config:get DATABASE_URL) npm run seed"
+		"seed-test": "node ./database/run-seed.js",
+		"seed:prod": "NODE_ENV=production DATABASE_URL=$(heroku config:get DATABASE_URL) node ./database/run-seed.js"
 	},
 	"keywords": [],
 	"author": "",
