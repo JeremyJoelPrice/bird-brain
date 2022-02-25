@@ -32,10 +32,8 @@
 		}
 	},
 	"POST /photo": {
-		"example request": {
-			"user_id": 1
-		},
+		"example request": "multipart form with an image file and a valid 'user_id'",
 		"some kind of photo": "somehow",
-		"example response": "TBD"
+		"example response": "an error for now, until the TensorFlow model is connected"
 	}
 }

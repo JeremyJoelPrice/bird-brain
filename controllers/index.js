@@ -1,3 +1,4 @@
+const fileSystem = require("fs");
 const { createUser, fetchCards, fetchUserId } = require("../models");
 
 exports.sampleController = (req, res, next) => {
@@ -28,4 +29,8 @@ exports.getCardsController = (req, res, next) => {
 			res.status(200).send({ cards: rows });
 		})
 		.catch(next);
+};
+
+exports.sendPhotoController = (req, res, next) => {
+	throw { status: 404, msg: "Kate Moss not found" };
 };

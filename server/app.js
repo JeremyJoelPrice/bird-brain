@@ -4,6 +4,7 @@ const {
 	loginController,
 	getCardsController,
 	sampleController,
+	sendPhotoController,
 	signupController
 } = require("../controllers");
 const {
@@ -11,6 +12,8 @@ const {
 	handlePsqlErrors,
 	handleServerErrors
 } = require("./errorHandlers");
+const multer = require("multer");
+const upload = multer();
 
 const app = express();
 
@@ -22,6 +25,8 @@ app.get("/login", loginController);
 app.post("/login", signupController);
 
 app.get("/users/:user_id/cards", getCardsController);
+
+app.post("/photo", upload.single("photo"), sendPhotoController);
 
 app.use(handleCustomErrors);
 app.use(handlePsqlErrors);
