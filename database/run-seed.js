@@ -1,7 +1,10 @@
 const seed = require("./seed.js");
 const database = require("./connection");
 
-const data = require(`../database/${process.env.NODE_ENV || "test"} data`);
+const ENV = process.env.NODE_ENV || "test";
+
+const data = require(`../database/${ENV} data`);
+console.log(ENV, "<<<env");
 
 const runSeed = () => {
 	return seed(data).then(() => database.end());
