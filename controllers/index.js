@@ -1,5 +1,5 @@
 const fileSystem = require("fs");
-const { createUser, fetchCards, fetchUserId } = require("../models");
+const { createUser, fetchCardsByUserId, fetchUserId } = require("../models");
 
 exports.sampleController = (req, res, next) => {
 	res.status(200).send(require("../server/greeting.json"));
@@ -23,8 +23,8 @@ exports.signupController = (req, res, next) => {
 		.catch(next);
 };
 
-exports.getCardsController = (req, res, next) => {
-	fetchCards(req.params.user_id)
+exports.getCardsByUserIdController = (req, res, next) => {
+	fetchCardsByUserId(req.params.user_id)
 		.then(({ rows }) => {
 			res.status(200).send({ cards: rows });
 		})

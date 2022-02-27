@@ -7,8 +7,6 @@ module.exports = async ({ fact_cards, users, users_fact_cards }) => {
 	if (users.length > 0) await insertUserData(users);
 	if (fact_cards.length > 0) {
 		await insertFactCardData(fact_cards);
-		console.log("seeding fact cards");
-		console.log(fact_cards);
 	}
 	if (users_fact_cards.length > 0) await insertUserFactCardData(users_fact_cards);
 };

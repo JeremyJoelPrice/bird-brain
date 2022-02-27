@@ -12,7 +12,7 @@ module.exports = [
 	{
 		fact: "mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris",
 		image_url: "SBS89EJS2ZV",
-		bird_name: "Cedric Adams"
+		bird_name: "Zane Orr"
 	},
 	{
 		fact: "in magna. Phasellus dolor elit, pellentesque a, facilisis",

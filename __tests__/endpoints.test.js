@@ -94,7 +94,7 @@ describe("/login", () => {
 	});
 });
 
-describe("/users/:user_id/fact_cards", () => {
+describe("GET /users/:user_id/fact_cards", () => {
 	it("returns 200 status and array of cards, each with a 'count' property", () => {
 		return supertest(app)
 			.get("/users/4/cards")
@@ -127,5 +127,94 @@ describe("/users/:user_id/fact_cards", () => {
 			.then((response) => {
 				expect(response.body).toMatchObject({ cards: [] });
 			});
+	});
+});
+
+describe("POST /photo", () => {
+	describe("rewarding user with new fact card", () => {
+		test("fetchFactCardsByBird returns an array of all fact cards of the given bird", () => {
+			const { fetchFactCardsByBird } = require("../models");
+			return fetchFactCardsByBird("Zane Orr").then((cards) => {
+				cards.forEach((card) => {
+					expect(card.bird_name).toBe("Zane Orr");
+				});
+			});
+		});
+		describe("pickACard selects a random index from the given array", () => {
+			const { pickACard } = require("../user-ops");
+			it("returns 0 when given an array of length 1", () => {
+				expect(pickACard([1])).toBe(0);
+			});
+			it("returns 0 or 1, randomly, when given an array of length 2", () => {
+				let mockRandom = jest.spyOn(Math, "random").mockReturnValue(0.5);
+				expect(pickACard(["apple", "banana"])).toBe(1);
+				mockRandom = jest.spyOn(Math, "random").mockReturnValue(0.49);
+				expect(pickACard(["apple", "banana"])).toBe(0);
+
+				mockRandom.mockRestore();
+			});
+		});
+		describe("addOwnershipOfCardByUser", () => {
+			it("adds the given card_id and user_id to users_fact_cards table", () => {
+				const { addOwnershipOfCardByUser } = require("../models");
+				// see card is not there
+				return supertest(app)
+					.get("/users/4/cards")
+					.expect(200)
+					.then((response) => {
+						expect(response.body).toMatchObject({
+							cards: [
+								{
+									card_id: 2,
+									fact: "rutrum.",
+									image_url: "QZD83SQL6DF",
+									bird_name: "Zane Orr",
+									count: "2"
+								},
+								{
+									card_id: 5,
+									fact: "diam. Proin dolor. Nulla semper tellus id nunc",
+									image_url: "JUH93KHS5YM",
+									bird_name: "Fletcher Hahn",
+									count: "1"
+								}
+							]
+						});
+						// add card
+						return addOwnershipOfCardByUser(4, 3).then(() => {
+							return supertest(app)
+								.get("/users/4/cards")
+								.expect(200)
+								.then((response) => {
+									// see card is there
+									expect(response.body).toMatchObject({
+										cards: [
+											{
+												card_id: 2,
+												fact: "rutrum.",
+												image_url: "QZD83SQL6DF",
+												bird_name: "Zane Orr",
+												count: "2"
+											},
+
+											{
+												fact: "mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris",
+												image_url: "SBS89EJS2ZV",
+												bird_name: "Zane Orr"
+											},
+											{
+												card_id: 5,
+												fact: "diam. Proin dolor. Nulla semper tellus id nunc",
+												image_url: "JUH93KHS5YM",
+												bird_name: "Fletcher Hahn",
+												count: "1"
+											}
+										]
+									});
+								});
+						});
+					});
+			});
+		});
 	});
 });

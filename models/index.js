@@ -24,7 +24,7 @@ exports.createUser = (email, password, nickname) => {
 	);
 };
 
-exports.fetchCards = (user_id) => {
+exports.fetchCardsByUserId = (user_id) => {
 	return database.query(
 		`
 		SELECT users_fact_cards.card_id, fact, bird_name, image_url, COUNT(id) AS count
@@ -34,5 +34,28 @@ exports.fetchCards = (user_id) => {
 		GROUP BY users_fact_cards.card_id, fact, bird_name, image_url
 		;`,
 		[user_id]
+	);
+};
+
+exports.fetchFactCardsByBird = (bird_name) => {
+	return database
+		.query(
+			`
+		SELECT * FROM fact_cards
+		WHERE bird_name = $1
+		`,
+			[bird_name]
+		)
+		.then((data) => data.rows);
+};
+
+exports.addOwnershipOfCardByUser = (user_id, card_id) => {
+	return database.query(
+		`
+	INSERT INTO users_fact_cards
+	(user_id, card_id)
+	VALUES ($1, $2)
+	;`,
+		[user_id, card_id]
 	);
 };
