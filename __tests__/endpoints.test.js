@@ -52,14 +52,22 @@ describe("/login", () => {
 		});
 	});
 	describe("POST", () => {
-		it("returns 201 status code if given unused credentials", () => {
+		it("returns 201 status code and user_id if given unused credentials", () => {
 			const newUser = {
 				email: "ornare.tortor.at@google.ca",
 				nickname: "Clinton Taylor",
 				password: "OKO17JER2VW"
 			};
 
-			return supertest(app).post("/login").send(newUser).expect(201);
+			return supertest(app)
+				.post("/login")
+				.send(newUser)
+				.expect(201)
+				.then(({ body }) => {
+					expect(body).toMatchObject({
+						user_id: 6
+					});
+				});
 		});
 		it("creates new user if given unused credentials", () => {
 			const newUser = {

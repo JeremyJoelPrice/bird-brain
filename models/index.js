@@ -14,14 +14,24 @@ exports.fetchUserId = async (email, password) => {
 };
 
 exports.createUser = (email, password, nickname) => {
-	return database.query(
-		`
+	return database
+		.query(
+			`
 		INSERT INTO users
 		(email, password, nickname)
 		VALUES ($1, $2, $3);
 		`,
-		[email, password, nickname]
-	);
+			[email, password, nickname]
+		)
+		.then(() => {
+			return database.query(
+				`
+		SELECT user_id FROM users
+		WHERE email=$1
+		;`,
+				[email]
+			);
+		});
 };
 
 exports.fetchCardsByUserId = (user_id) => {

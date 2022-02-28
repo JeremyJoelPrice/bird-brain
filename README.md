@@ -10,7 +10,7 @@ If no user is found, `404` Not Found will be returned.
 ## Signing up
 Bird Brain again assumes the password and email address are valid.
 If the email is already in the database, a `409` error will be returned.
-If the email doens't match anything, the user will be added to the database, and a `201` status will be returned.
+If the email doens't match anything, the user will be added to the database, and their new `user_id` will be returned.
 
 ## Getting Fact Cards
 Bird Brain must be given a valid `user_id`.

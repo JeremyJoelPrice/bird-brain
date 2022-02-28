@@ -6,8 +6,8 @@ exports.sampleController = (req, res, next) => {
 };
 
 exports.loginController = (req, res, next) => {
-	const {email, password} = req.query;
-	
+	const { email, password } = req.query;
+
 	fetchUserId(email, password)
 		.then((user_id) => {
 			res.send({ user_id });
@@ -18,8 +18,8 @@ exports.loginController = (req, res, next) => {
 exports.signupController = (req, res, next) => {
 	const { email, password, nickname } = req.body;
 	createUser(email, password, nickname)
-		.then(() => {
-			res.send(201);
+		.then(({ rows }) => {
+			res.status(201).send({ user_id: rows[0].user_id });
 		})
 		.catch(next);
 };

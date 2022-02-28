@@ -15,7 +15,7 @@
 				"email": "example@email.com",
 				"password": "examplepassword"
 			},
-			"example response": { "status": 201 }
+			"example response": { "user_id": 1 }
 		}
 	},
 	"GET /users/:user_id/fact_cards": {
