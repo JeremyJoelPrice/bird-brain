@@ -6,7 +6,8 @@ exports.sampleController = (req, res, next) => {
 };
 
 exports.loginController = (req, res, next) => {
-	const { email, password } = req.body;
+	const {email, password} = req.query;
+	
 	fetchUserId(email, password)
 		.then((user_id) => {
 			res.send({ user_id });

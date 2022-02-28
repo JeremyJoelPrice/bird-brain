@@ -21,19 +21,17 @@ describe("GET /", () => {
 describe("/login", () => {
 	describe("GET", () => {
 		it("returns 200 status and user_id, if given valid credentials", async () => {
-			const { body: bodyA } = await supertest(app).get("/login").send({
-				email: "orci.in.consequat@yahoo.com",
-				password: "RDT33MET2KV"
-			});
+			const { body: bodyA } = await supertest(app).get(
+				"/login?email=orci.in.consequat@yahoo.com&password=RDT33MET2KV"
+			);
 
 			expect(bodyA).toMatchObject({
 				user_id: 1
 			});
 
-			const { body: bodyB } = await supertest(app).get("/login").send({
-				email: "feugiat.lorem.ipsum@icloud.org",
-				password: "CTR04YFF4GA"
-			});
+			const { body: bodyB } = await supertest(app).get(
+				"/login?email=feugiat.lorem.ipsum@icloud.org&password=CTR04YFF4GA"
+			);
 
 			expect(bodyB).toMatchObject({
 				user_id: 3
@@ -41,10 +39,11 @@ describe("/login", () => {
 		});
 		it("returns 404 Not Found if given invalid credentials", () => {
 			return supertest(app)
-				.get("/login")
-				.send({
-					email: "orci.in.consequat@yahoo.com",
-					password: "not a password"
+				.get("/login", {
+					params: {
+						email: "orci.in.consequat@yahoo.com",
+						password: "not a password"
+					}
 				})
 				.then((response) => {
 					expect(response.status).toBe(404);
