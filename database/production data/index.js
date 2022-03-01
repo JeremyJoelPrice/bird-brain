@@ -1,8 +1,8 @@
 exports.users = [
 	{
-		username: "Paki Wong",
-		email: "vel.mauris.integer@aol.net",
-		password: "NLB65TPC5LE"
+		"username": "Nora Foreman",
+		"email": "id@aol.com",
+		"password": "HRD24UHQ4DI"
 	}
 ];
 exports.fact_cards = require("./fact_cards");
