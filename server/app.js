@@ -27,7 +27,7 @@ app.get("/", sampleController);
 app.get("/login", loginController);
 app.post("/login", signupController);
 
-app.get("/users/:user_id/cards", getCardsByUserIdController);
+app.get("/users/:user_id/fact_cards", getCardsByUserIdController);
 
 app.post("/photo", upload.single("photo"), sendPhotoController);
 app.get("/photo/:bird/:imageNum", getPhotoController);

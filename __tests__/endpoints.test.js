@@ -104,7 +104,7 @@ describe("/login", () => {
 describe("GET /users/:user_id/fact_cards", () => {
 	it("returns 200 status and array of cards, each with a 'count' property", () => {
 		return supertest(app)
-			.get("/users/4/cards")
+			.get("/users/4/fact_cards")
 			.expect(200)
 			.then((response) => {
 				expect(response.body).toMatchObject({
@@ -129,7 +129,7 @@ describe("GET /users/:user_id/fact_cards", () => {
 	});
 	it("returns 200 status and empty array, if given a user who has no cards", () => {
 		return supertest(app)
-			.get("/users/1/cards")
+			.get("/users/1/fact_cards")
 			.expect(200)
 			.then((response) => {
 				expect(response.body).toMatchObject({ cards: [] });
@@ -166,7 +166,7 @@ describe("POST /photo", () => {
 				const { addOwnershipOfCardByUser } = require("../models");
 				// see card is not there
 				return supertest(app)
-					.get("/users/4/cards")
+					.get("/users/4/fact_cards")
 					.expect(200)
 					.then((response) => {
 						expect(response.body).toMatchObject({
@@ -190,7 +190,7 @@ describe("POST /photo", () => {
 						// add card
 						return addOwnershipOfCardByUser(4, 3).then(() => {
 							return supertest(app)
-								.get("/users/4/cards")
+								.get("/users/4/fact_cards")
 								.expect(200)
 								.then((response) => {
 									// see card is there
