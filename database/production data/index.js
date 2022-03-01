@@ -1,12 +1,24 @@
 exports.users = [
 	{
-		"username": "Nora Foreman",
-		"email": "id@aol.com",
-		"password": "HRD24UHQ4DI"
+		username: "Nora Foreman",
+		email: "id@aol.com",
+		password: "HRD24UHQ4DI"
 	}
 ];
 exports.fact_cards = require("./fact_cards");
 exports.users_fact_cards = [
+	{
+		user_id: 1,
+		card_id: 1
+	},
+	{
+		user_id: 1,
+		card_id: 1
+	},
+	{
+		user_id: 1,
+		card_id: 1
+	},
 	{
 		user_id: 1,
 		card_id: 1
